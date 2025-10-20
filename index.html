@@ -9,11 +9,11 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+            background-color: #f5f5f5;
             color: #333;
             min-height: 100vh;
             padding: 20px;
@@ -23,11 +23,10 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 600px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border: 1px solid #ddd;
             padding: 30px;
             margin-top: 20px;
         }
@@ -35,122 +34,84 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            color: #d63384;
-            font-size: 2.2rem;
-        }
-        
-        .description {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #555;
-            line-height: 1.5;
+            color: #333;
+            font-size: 1.8rem;
         }
         
         .converter {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
         
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 5px;
         }
         
         label {
-            font-weight: 600;
-            color: #d63384;
+            font-weight: bold;
+            color: #333;
         }
         
         input, select {
-            padding: 12px 15px;
-            border: 2px solid #f8bbd9;
-            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
             font-size: 16px;
-            transition: all 0.3s;
-            background-color: #fff;
-        }
-        
-        input:focus, select:focus {
-            border-color: #d63384;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.2);
         }
         
         button {
-            background: linear-gradient(to right, #d63384, #ec407a);
+            background-color: #333;
             color: white;
             border: none;
-            padding: 14px 20px;
-            border-radius: 10px;
+            padding: 12px;
             font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
         }
         
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
-            background: linear-gradient(to right, #c22575, #d81b60);
+            background-color: #555;
         }
         
         .results {
             margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
         }
         
-        .result-box {
-            background-color: #fce4ec;
-            border-radius: 10px;
-            padding: 15px;
-            border-left: 4px solid #d63384;
-            transition: transform 0.3s;
-        }
-        
-        .result-box:hover {
-            transform: translateY(-5px);
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
         }
         
         .result-label {
-            font-size: 14px;
-            color: #ad1457;
-            margin-bottom: 5px;
+            font-weight: bold;
         }
         
         .result-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: #d63384;
-            word-break: break-all;
+            font-family: monospace;
         }
         
         .error {
-            color: #d63384;
+            color: #d32f2f;
             margin-top: 10px;
-            font-weight: 500;
             text-align: center;
             padding: 10px;
-            background-color: rgba(214, 51, 132, 0.1);
-            border-radius: 8px;
+            background-color: rgba(211, 47, 47, 0.1);
             display: none;
         }
         
         .info {
             margin-top: 30px;
-            background-color: #fce4ec;
-            border-radius: 10px;
-            padding: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
         
         .info h2 {
-            color: #d63384;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
         }
         
         .info ul {
@@ -158,44 +119,8 @@
         }
         
         .info li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .system-examples {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .example {
-            background-color: #f8bbd9;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .results {
-                grid-template-columns: 1fr;
-            }
-            
-            .system-examples {
-                flex-direction: column;
-            }
+            margin-bottom: 5px;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -203,19 +128,14 @@
     <div class="container">
         <h1>Конвертер систем счисления</h1>
         
-        <p class="description">
-            Введите число и выберите исходную систему счисления, затем нажмите "Конвертировать", 
-            чтобы увидеть представление числа в других системах счисления.
-        </p>
-        
         <div class="converter">
             <div class="input-group">
-                <label for="numberInput">Введите число:</label>
-                <input type="text" id="numberInput" placeholder="Например: 255, FF, 1010" autofocus>
+                <label for="numberInput">Число:</label>
+                <input type="text" id="numberInput" placeholder="255, FF, 1010" autofocus>
             </div>
             
             <div class="input-group">
-                <label for="fromBase">Исходная система счисления:</label>
+                <label for="fromBase">Исходная система:</label>
                 <select id="fromBase">
                     <option value="2">Двоичная (2)</option>
                     <option value="8">Восьмеричная (8)</option>
@@ -229,42 +149,35 @@
             <div class="error" id="errorMessage"></div>
             
             <div class="results">
-                <div class="result-box">
-                    <div class="result-label">Двоичная (2)</div>
+                <div class="result-row">
+                    <div class="result-label">Двоичная (2):</div>
                     <div class="result-value" id="binaryResult">-</div>
                 </div>
                 
-                <div class="result-box">
-                    <div class="result-label">Восьмеричная (8)</div>
+                <div class="result-row">
+                    <div class="result-label">Восьмеричная (8):</div>
                     <div class="result-value" id="octalResult">-</div>
                 </div>
                 
-                <div class="result-box">
-                    <div class="result-label">Десятичная (10)</div>
+                <div class="result-row">
+                    <div class="result-label">Десятичная (10):</div>
                     <div class="result-value" id="decimalResult">-</div>
                 </div>
                 
-                <div class="result-box">
-                    <div class="result-label">Шестнадцатеричная (16)</div>
+                <div class="result-row">
+                    <div class="result-label">Шестнадцатеричная (16):</div>
                     <div class="result-value" id="hexResult">-</div>
                 </div>
             </div>
         </div>
         
-        <div class="system-examples">
-            <div class="example">Двоичная: 1010</div>
-            <div class="example">Восьмеричная: 12</div>
-            <div class="example">Десятичная: 10</div>
-            <div class="example">Шестнадцатеричная: A</div>
-        </div>
-        
         <div class="info">
             <h2>О системах счисления</h2>
             <ul>
-                <li><strong>Двоичная (2)</strong> - система счисления с основанием 2, использует цифры 0 и 1.</li>
-                <li><strong>Восьмеричная (8)</strong> - система счисления с основанием 8, использует цифры от 0 до 7.</li>
-                <li><strong>Десятичная (10)</strong> - система счисления с основанием 10, использует цифры от 0 до 9.</li>
-                <li><strong>Шестнадцатеричная (16)</strong> - система счисления с основанием 16, использует цифры от 0 до 9 и буквы от A до F.</li>
+                <li><strong>Двоичная (2)</strong> - основание 2, цифры: 0, 1</li>
+                <li><strong>Восьмеричная (8)</strong> - основание 8, цифры: 0-7</li>
+                <li><strong>Десятичная (10)</strong> - основание 10, цифры: 0-9</li>
+                <li><strong>Шестнадцатеричная (16)</strong> - основание 16, цифры: 0-9, A-F</li>
             </ul>
         </div>
     </div>
@@ -300,17 +213,17 @@
                 
                 // Проверка на пустой ввод
                 if (!inputValue) {
-                    showError('Пожалуйста, введите число');
+                    showError('Введите число');
                     return;
                 }
                 
                 // Проверка корректности ввода
                 if (!isValidNumber(inputValue, base)) {
-                    showError(`Некорректный формат числа для ${base}-ичной системы`);
+                    showError(`Некорректный формат для ${base}-ичной системы`);
                     return;
                 }
                 
-                // Скрываем сообщение об ошибке, если оно было показано
+                // Скрываем сообщение об ошибке
                 hideError();
                 
                 // Конвертируем в десятичную систему
@@ -318,13 +231,13 @@
                 try {
                     decimalValue = parseInt(inputValue, parseInt(base));
                 } catch (e) {
-                    showError('Ошибка при конвертации числа');
+                    showError('Ошибка конвертации');
                     return;
                 }
                 
                 // Проверка на корректность результата
                 if (isNaN(decimalValue)) {
-                    showError('Невозможно конвертировать число');
+                    showError('Невозможно конвертировать');
                     return;
                 }
                 
@@ -373,10 +286,6 @@
                     convertNumber();
                 }
             });
-            
-            // Пример автоматической конвертации при загрузке
-            numberInput.value = "255";
-            convertNumber();
         });
     </script>
 </body>
